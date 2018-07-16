@@ -129,6 +129,9 @@ int Render()
 				info.namesize = GetTextWidth(name.c_str(), pFontSmall);
 				info.item = ActorItemWieleded_str;
 				//if (name.find("BP_PlayerPirate_C") != std::string::npos || name.find("BP_TreasureChest_P") != std::string::npos || name.find("BP_BountyRewardSkull_P") != std::string::npos || name.find("BP_ShipwreckTreasureChest_P") != std::string::npos || (name.find("BP_MerchantCrate") != std::string::npos && name.find("Proxy") != std::string::npos) || name.find("BP_SmallShipTemplate_C") != std::string::npos || name.find("BP_LargeShipTemplate_C") != std::string::npos || name.find("Skeleton") != std::string::npos)
+//
+// Players
+//
 				if (name.find("BP_PlayerPirate_C") != std::string::npos)
 				{
 					const auto Actorhealthcomponet = mem.Read<ULONG_PTR>(Actor + Offsets::HealthComponent);
@@ -160,6 +163,9 @@ int Render()
 					ActorArray.push_back(info);
 
 				}
+//
+// Treasure Chests
+//
 				else if (name.find("BP_TreasureChest_P") != std::string::npos || name.find("BP_ShipwreckTreasureChest_P") != std::string::npos || name.find("StrongholdKey") != std::string::npos)
 				{
 
@@ -222,6 +228,9 @@ int Render()
 					}
 					ActorArray.push_back(info);
 				}
+//
+// Bounty Reward Skulls
+//
 				else if (name.find("BP_BountyRewardSkull_P") != std::string::npos)
 				{
 
@@ -260,6 +269,9 @@ int Render()
 					}
 					ActorArray.push_back(info);
 				}
+//
+// Merchant Crates
+//
 				else if (name.find("BP_MerchantCrate") != std::string::npos && name.find("Proxy") != std::string::npos)
 				{
 					info.Location = Actorrelativelocation;
@@ -321,6 +333,68 @@ int Render()
 					//info.namesize = GetTextWidth(info.name.c_str(), pFontSmall);
 					ActorArray.push_back(info);
 				}
+//
+// Skeleton Fort - Skull Cloud
+//
+				else if (name.find("BP_SkellyFort") != std::string::npos)
+				{
+					info.type = fort;
+					info.Location = Actorrelativelocation;
+					info.TopLocation = Vector3(Actorrelativelocation.x, Actorrelativelocation.y, Actorrelativelocation.z + 10);
+					if (name.find("SkullCloud") != std::string::npos)
+					{
+						info.id = ActorID;
+						info.name = "Skeleton Fort";
+						info.rareity = Legendary;
+					}
+
+					ActorArray.push_back(info);
+				}
+//
+// Treasure Artifacts (Shinys)
+//
+				else if (name.find("BP_Treasure_Artifact") != std::string::npos && name.find("Proxy") != std::string::npos || name.find("BP_TreasureArtifact_Wieldable") != std::string::npos)
+				{
+
+					info.type = artifact;
+					info.Location = Actorrelativelocation;
+					info.TopLocation = Vector3(Actorrelativelocation.x, Actorrelativelocation.y, Actorrelativelocation.z + 10);
+					if (name.find("box") != std::string::npos)
+					{
+						info.id = ActorID;
+						info.name = "Shiny Box";
+						info.rareity = Common;
+					}
+					if (name.find("goblet") != std::string::npos)
+					{
+						info.id = ActorID;
+						info.name = "Shiny Goblet";
+						info.rareity = Rare;
+					}
+					if (name.find("impressive") != std::string::npos)
+					{
+						info.id = ActorID;
+						info.name = "Shiny Impressive";
+						info.rareity = Legendary;
+					}
+					if (name.find("vase") != std::string::npos)
+					{
+						info.id = ActorID;
+						info.name = "Shiny Vase";
+						info.rareity = Mythical;
+					}
+					if (name.find("base") != std::string::npos)
+					{
+						info.id = ActorID;
+						info.name = "??Shiny Base??";
+						info.rareity = Rare;
+					}
+
+					ActorArray.push_back(info);
+				}
+//
+// SKELETONS
+//
 				else if (name.find("Skeleton") != std::string::npos)
 				{
 					info.id = ActorID;
@@ -330,10 +404,12 @@ int Render()
 					info.TopLocation = Vector3(Actorrelativelocation.x, Actorrelativelocation.y, Actorrelativelocation.z + 75);
 					ActorArray.push_back(info);
 				}
-
+//
+// ANIMALS (chickens/pigs/snakes)
+//
 				else if (name.find("BP_Chicken_") != std::string::npos)
 				{
-
+				// Chickens
 					info.type = chicken;
 					info.Location = Actorrelativelocation;
 					info.TopLocation = Vector3(Actorrelativelocation.x, Actorrelativelocation.y, Actorrelativelocation.z + 10);
@@ -364,9 +440,87 @@ int Render()
 
 					ActorArray.push_back(info);
 				}
+				// Pigs
+				else if (name.find("BP_Pig_") != std::string::npos)
+				{
 
+					info.type = pig;
+					info.Location = Actorrelativelocation;
+					info.TopLocation = Vector3(Actorrelativelocation.x, Actorrelativelocation.y, Actorrelativelocation.z + 10);
+					if (name.find("Common") != std::string::npos)
+					{
+						info.id = ActorID;
+						info.name = "Pink Pig";
+						info.rareity = Common;
+					}
+					if (name.find("Rare") != std::string::npos)
+					{
+						info.id = ActorID;
+						info.name = "Rare Pig";
+						info.rareity = Rare;
+					}
+					if (name.find("Legendary") != std::string::npos)
+					{
+						info.id = ActorID;
+						info.name = "Black Pig";
+						info.rareity = Legendary;
+					}
+					if (name.find("Mythical") != std::string::npos)
+					{
+						info.id = ActorID;
+						info.name = "Golden Pig";
+						info.rareity = Mythical;
+					}
 
+					ActorArray.push_back(info);
+				}
+				// Snakes
+				else if (name.find("BP_Snake_") != std::string::npos)
+				{
 
+					info.type = snake;
+					info.Location = Actorrelativelocation;
+					info.TopLocation = Vector3(Actorrelativelocation.x, Actorrelativelocation.y, Actorrelativelocation.z + 10);
+					if (name.find("Common") != std::string::npos)
+					{
+						info.id = ActorID;
+						info.name = "Common Snake";
+						info.rareity = Common;
+					}
+					if (name.find("Rare") != std::string::npos)
+					{
+						info.id = ActorID;
+						info.name = "Rare Snake";
+						info.rareity = Rare;
+					}
+					if (name.find("Legendary") != std::string::npos)
+					{
+						info.id = ActorID;
+						info.name = "Black Snake";
+						info.rareity = Legendary;
+					}
+					if (name.find("Mythical") != std::string::npos)
+					{
+						info.id = ActorID;
+						info.name = "Golden Snake";
+						info.rareity = Mythical;
+					}
+
+					ActorArray.push_back(info);
+				}
+//
+// SHIPS
+//
+				else if (name.find("BP_SmallShipNetProxy") != std::string::npos || name.find("BP_LargeShipNetProxy") != std::string::npos)
+				{
+					info.id = ActorID;
+					info.name = "Ship";
+					info.type = ship;
+					info.Location = Actorrelativelocation;
+					info.TopLocation = Vector3(Actorrelativelocation.x, Actorrelativelocation.y, Actorrelativelocation.z + 300);
+					info.yaw = ActorYaw;
+					ActorArray.push_back(info);
+				}
 				else if (name.find("BP_SmallShipTemplate_C") != std::string::npos || name.find("BP_LargeShipTemplate_C") != std::string::npos)
 				{
 					info.id = ActorID;
@@ -377,6 +531,34 @@ int Render()
 					info.yaw = ActorYaw;
 					ActorArray.push_back(info);
 				}
+//
+// SUNKNEN CURSE ARTIFACTS
+//
+				else if (name.find("BP_SunkenCurseArtefact_") != std::string::npos)
+				{
+					info.id = ActorID;
+					if (name.find("Ruby") != std::string::npos)
+					{
+						info.name = "Ruby UnderWater Statue";
+					}
+					else if (name.find("Emerald") != std::string::npos)
+					{
+						info.name = "Emerald UnderWater Statue";
+					}
+					else if (name.find("Sapphire") != std::string::npos)
+					{
+						info.name = "Sapphire UnderWater Statue";
+					}
+					info.type = animalcrate;
+					info.Location = Actorrelativelocation;
+					info.TopLocation = Vector3(Actorrelativelocation.x, Actorrelativelocation.y, Actorrelativelocation.z + 75);
+					ActorArray.push_back(info);
+
+				}
+
+//
+// TREASURE MAPS (XMarksTheSpot)
+//
 				else if (name.find("IslandService") != std::string::npos)
 				{
 					IslandDataAsset_PTR = mem.Read<ULONG_PTR>(Actor + Offsets::IslandDataAsset);
@@ -455,7 +637,8 @@ int Render()
 			FillRGB(180, 30, 1, 300, 75, 68, 67, 90);
 			FillRGB(30, 180, 300, 1, 75, 68, 67, 90);
 
-			for (int i = 0; i < ActorArray.size(); i++)
+
+ 			for (int i = 0; i < ActorArray.size(); i++)
 			{
 
 				float angle = getAngle(Vector2(myLocation.x, myLocation.y), Vector2(ActorArray.at(i).Location.x, ActorArray.at(i).Location.y));
@@ -633,10 +816,12 @@ int Render()
 			}
 
 	}
-
+//
+// KEYBOARD INPUT
+//
 	if (GetAsyncKeyState(VK_F9) & 1)
-	{
-
+	{//Close the ESP with F9 key.
+		
 		exit(1);
 	}
 

@@ -33,7 +33,7 @@ public:
 	static constexpr int Marks = 0x8C8;
 	static constexpr int MarksCount = Marks + 0x8;
 
-#pragma region Almsonst never changing offsets
+#pragma region Almost never changing offsets
 	// UObject
 	static constexpr int Id = 0x18;
 
