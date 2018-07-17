@@ -67,9 +67,9 @@ public:
 	static constexpr int MaxHealth = 0xD0;
 
 	// USceneComponent
-	static constexpr int RelativeLocation = 0x1B0;
-	static constexpr int RelativeRotation = RelativeLocation + 0xC;
-	static constexpr int RelativeRotationYaw = RelativeRotation + 0x4;
+	static constexpr int CameraLocation = 0x1B0;
+	static constexpr int CameraRotation = CameraLocation + 0xC;
+	static constexpr int CameraFOV = CameraRotation + 0x4;
 
 	// AIslandService
 	static constexpr int IslandDataAsset = 0x4E8;
